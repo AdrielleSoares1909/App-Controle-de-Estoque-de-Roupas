@@ -1,11 +1,13 @@
-from fastapi import FastAPI
-from pydantic import BaseModel
+from sqlalchemy import Column,Integer,String,Float
+from src.infra.sqlalchemy.config.database import Base
 
 
+class Produto(Base):
 
-class Produto(BaseModel):
-    nome: str
-    tamanho: int
-    preço: float
-    quantidade: int
-    categoria: str
+    __tablename__ = 'produto'
+
+    nome = Column(String)
+    tamanho = Column(String)
+    preço = Column(Float)
+    quantidade = Column(Integer) 
+    categoria = Column(String)
