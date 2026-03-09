@@ -2,13 +2,15 @@ from sqlalchemy.orm import Session
 from src.schemas import schemas
 from src.infra.sqlalchemy.models import models
 
+
+
 class RepositorioProduto():
 
     def __init__(self, db: Session):
         self.db = db
 
     def criar(self, produto: schemas.Produto):
-        db_produto = models.Produto(nome=produto.nome,tamanho=produto.tamanho,preco=produto.preco,quantidade=produto.quantidade,categoria=produto.categoria)
+        db_produto = models.Produto(nome=produto.nome,tamanho=produto.tamanho,preço=produto.preço,quantidade=produto.quantidade,categoria=produto.categoria)
 
 
         self.db.add(db_produto)
