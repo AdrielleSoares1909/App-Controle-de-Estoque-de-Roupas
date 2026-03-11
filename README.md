@@ -31,7 +31,7 @@ Deletar produtos do estoque
 _____________________________
 Objetivo do projeto:
 
-Este projeto foi desenvolvido com o objetivo de praticar conceitos de desenvolvimento backend, conforme a minha realizade:
+Este projeto foi desenvolvido com o objetivo de praticar conceitos de desenvolvimento backend, conforme a minha realidade:
 
 criação de APIs REST
 
