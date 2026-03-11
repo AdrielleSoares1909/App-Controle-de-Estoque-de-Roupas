@@ -26,8 +26,15 @@ def listar_produtos(db: Session = Depends(get_db)):
     return produtos
 
 
-@app.get('/produtos/quantidade/{tamanho}')
-def obter_quantidade(tamanho: str, db: Session = Depends(get_db)):
+@app.get('/produtos/estoque/{nome}')
+def obter_estoque(nome: str, db: Session = Depends(get_db)):
    repositorio = RepositorioProduto(db)
-   quantidade = repositorio.obter_quantidade(tamanho)
-   return {"tamanho": tamanho, "quantidade": quantidade}
+   estoque = repositorio.obter_estoque_por_produto(nome)
+   return estoque
+
+
+@app.delete('/produtos/{nome}/{tamanho}')
+def deletar_estoque(nome: str, tamanho: str, db: Session = Depends(get_db)):
+    repositorio = RepositorioProduto(db)
+    repositorio.deletar(nome, tamanho)
+    return {"Removido "}

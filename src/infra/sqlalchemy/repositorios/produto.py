@@ -24,14 +24,27 @@ class RepositorioProduto():
         produtos = self.db.query(models.Produto).all()
         return produtos
 
-    def obter_quantidade(self, produto_tamanho: str):
-        stmt = select(models.Produto.quantidade).filter_by(tamanho=produto_tamanho)
-        quantidade = self.db.execute(stmt).scalar()
+    def obter_estoque_por_produto(self, nome_produto: str):
+        stmt = select(models.Produto).filter_by(nome=nome_produto)
+        produtos = self.db.execute(stmt).scalars().all()
 
-        return quantidade
+        estoque = []
+
+        for produto in produtos:
+            estoque.append({
+                "tamanho": produto.tamanho,
+                "quantidade": produto.quantidade
+            })
+
+        return {
+            "produto": nome_produto,
+            "estoque": estoque
+        }
     
-    def quantidade(self):
-        pass
+    def deletar(self, nome_produto: str, tamanho_produto: str):
+        stmt = select(models.Produto).filter_by(nome=nome_produto, tamanho = tamanho_produto)
+        produto = self.db.execute(stmt).scalars().first()
 
-    def deletar(self):
-        pass     
+        if produto:
+            self.db.delete(produto)
+            self.db.commit()    
