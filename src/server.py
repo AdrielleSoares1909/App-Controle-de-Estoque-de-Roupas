@@ -24,3 +24,10 @@ def criar_produto(produto: Produto, db: Session = Depends(get_db)):
 def listar_produtos(db: Session = Depends(get_db)):
     produtos = RepositorioProduto(db).listar()
     return produtos
+
+
+@app.get('/produtos/quantidade/{tamanho}')
+def obter_quantidade(tamanho: str, db: Session = Depends(get_db)):
+   repositorio = RepositorioProduto(db)
+   quantidade = repositorio.obter_quantidade(tamanho)
+   return {"tamanho": tamanho, "quantidade": quantidade}

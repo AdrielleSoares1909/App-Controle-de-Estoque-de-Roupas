@@ -1,3 +1,4 @@
+from sqlalchemy import select 
 from sqlalchemy.orm import Session
 from src.schemas import schemas
 from src.infra.sqlalchemy.models import models
@@ -22,11 +23,13 @@ class RepositorioProduto():
     def listar(self):
         produtos = self.db.query(models.Produto).all()
         return produtos
-    
-    
-    def atualizar(self):
-        pass
 
+    def obter_quantidade(self, produto_tamanho: str):
+        stmt = select(models.Produto.quantidade).filter_by(tamanho=produto_tamanho)
+        quantidade = self.db.execute(stmt).scalar()
+
+        return quantidade
+    
     def quantidade(self):
         pass
 
